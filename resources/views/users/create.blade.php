@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Create User</title>
+    <title>Create User Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -15,7 +15,7 @@
                     <h2>Add User</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Previous</a>
+                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
                 </div>
             </div>
         </div>
