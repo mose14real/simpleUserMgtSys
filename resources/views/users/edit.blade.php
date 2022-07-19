@@ -40,7 +40,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Email:</strong>
-                        <input type="email" name="email" class="form-control" placeholder="example@mail.com" value="{{ $user->email }}">
+                        <input type="email" name="email" class="form-control" placeholder="example@mail.com" value="{{ $user->email }}" readonly>
                         @error('email')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror

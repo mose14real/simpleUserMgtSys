@@ -32,8 +32,8 @@ class UserCRUDController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required|min:11'
+            'email' => 'required|unique:users',
+            'phone' => 'required|min:11|max:11'
         ]);
         $user = new User;
         $user->name = $request->name;
@@ -75,7 +75,7 @@ class UserCRUDController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required|min:11',
+            'phone' => 'required|min:11|max:11',
         ]);
         $user = User::find($id);
         $user->name = $request->name;
