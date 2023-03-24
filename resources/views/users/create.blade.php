@@ -1,62 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layouts title="Create User Page">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Create User Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
     <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left mb-2">
-                    <h2>Add User</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-                </div>
-            </div>
-        </div>
-        @if(session('status'))
-        <div class="alert alert-success mb-1 mt-1">
-            {{ session('status') }}
-        </div>
-        @endif
-        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Name:</strong>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Your Fullname" required>
-                        @error('name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Email:</strong>
-                        <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
-                        @error('email')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Phone:</strong>
-                        <input type="text" name="phone" class="form-control" placeholder="08123456789">
-                        @error('phone')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
-            </div>
-        </form>
-</body>
 
-</html>
+        <x-flash-message />
+
+        <div class="col-md-4 mx-auto">
+
+            <div class="text-center mt-6 mb-6">
+                <h2>Add User</h2>
+            </div>
+            <div class="float-end mb-3">
+                <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
+            </div>
+
+            <form action="{{ route('users.store') }}" method="POST">
+                @csrf
+
+                <div class="form-group col-md-12">
+                    <label class="form-label mt-3">Name</label>
+                    <input type="text" class="form-control" placeholder="John Doe" name="name"
+                        value="{{ old('name') }}" required>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="example@mail.com" name="email"
+                        value="{{ old('email') }}" required>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-label">Phone</label>
+                    <input type="text" class="form-control" placeholder="08123456789" name="phone"
+                        value="{{ old('phone') }}" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+            </form>
+        </div>
+    </div>
+</x-layouts>

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserCRUDController extends Controller
 {
-    //
     public function index()
     {
-        $data['users'] = User::orderBy('id', 'desc')->paginate(5);
-        return view('users.index', $data);
+        $users = User::orderBy('id', 'desc')->paginate(5);
+        return view('users.index', compact('users'));
     }
     /**
      * Show the form for creating a new resource.
@@ -28,20 +28,16 @@ class UserCRUDController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'phone' => 'required|min:11|max:11'
+        $request->validated();
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone
         ]);
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->save();
-        return redirect()->route('users.index')
-            ->with('success', 'User has been created successfully.');
+        return redirect()->route('users.index')->withSuccess('User created successfully.');
     }
     /**
      * Display the specified resource.
@@ -70,20 +66,14 @@ class UserCRUDController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required|min:11|max:11',
-        ]);
+        $credentials = $request->validated();
         $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->save();
-        return redirect()->route('users.index')
-            ->with('success', 'User Has Been updated successfully');
+        if ($credentials) {
+            $user->update($credentials);
+        }
+        return redirect()->route('users.index')->withSuccess('User updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -94,7 +84,6 @@ class UserCRUDController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')
-            ->with('success', 'User has been deleted successfully');
+        return redirect()->route('users.index')->withSuccess('User deleted successfully');
     }
 }
