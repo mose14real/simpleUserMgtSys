@@ -23,16 +23,11 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        // $rules = [
-        //     'name' => [],
-        //     'email' => [],
-        //     'phone' => []
-        // ];
 
         if (in_array($this->method(), ['POST'])) {
             $rules['name'] = ['required'];
             $rules['email'] = ['required', 'unique:users'];
-            $rules['phone'] = ['required', 'min:11', 'max:11'];
+            $rules['phone'] = ['required', 'min:11', 'max:17'];
         }
 
         if (in_array($this->method(), ['PATCH'])) {

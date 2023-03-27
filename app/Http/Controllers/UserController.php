@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class UserCRUDController extends Controller
+class UserController extends Controller
 {
     public function index()
     {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserCRUDController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +14,5 @@ use App\Http\Controllers\UserCRUDController;
 |
 */
 
-Route::resource('/', UserCRUDController::class);
-Route::resource('users', UserCRUDController::class);
+Route::resource('/', UserController::class);
+Route::resource('users', UserController::class);
